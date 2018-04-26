@@ -37,8 +37,9 @@ public void setup() {
 	H.init(this).background(bgC);
 
 	d1 = new HRect(6).size(50).loc(100,100).anchorAt(H.CENTER).noStroke().fill(0xffFF0044);
+	d1.loc(200,100);
 	H.add(d1);
-
+	
 }
 
 // ================================================================
