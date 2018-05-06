@@ -21,15 +21,8 @@ void settings(){
 void setup() {
 	H.init(this).background(bgC);
 	smooth();
-	
-
-}
-
-// ================================================================
-void draw() {
-	background(bgC);
 	for (int i = 0; i < 100; ++i) {
-		d = new HRect();
+		d = new HEllipse();
 		x = random(width);
 		y = random(height);
 		float r = random(360);
@@ -42,6 +35,13 @@ void draw() {
 			.stroke(#FF7700);
 		H.add(d);
 	}
+
+}
+
+// ================================================================
+void draw() {
+	background(bgC);
+
 
 	H.drawStage();
 }
