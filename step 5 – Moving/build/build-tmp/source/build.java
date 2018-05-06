@@ -4,6 +4,8 @@ import processing.event.*;
 import processing.opengl.*; 
 
 import hype.*; 
+import hype.extended.behavior.HOscillator; 
+import hype.extended.colorist.HColorPool; 
 import peasy.*; 
 
 import java.util.HashMap; 
@@ -24,6 +26,10 @@ String dataPATH = "../../data";
 
 // ================================================================
 
+
+
+
+// import hype.extended.layout.HGridLayout;
 
 
 PeasyCam cam;
@@ -59,7 +65,18 @@ public void setup() {
 			.fill(fgC)
 			.stroke(0xffFF7700);
 
-		H.add(d);
+
+
+	new HOscillator()
+		.target(d)
+		.property(H.Z)
+		.relativeVal(0)
+		.range(-100, 100)
+		.speed(random(0, .5f))
+		.freq(5);
+
+		H.add(d).colorist(new HColorPool(0xffFFFFFF, 0xffF7F7F7, 0xffECECEC, 0xff333333, 0xff0095A8, 0xff00616F, 0xffFF3300, 0xffFF6600).fillOnly());
+
 	}
 
 cam = new PeasyCam(this, 600);

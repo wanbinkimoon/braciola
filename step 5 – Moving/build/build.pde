@@ -6,6 +6,10 @@ String dataPATH = "../../data";
 // ================================================================
 
 import hype.*;
+import hype.extended.behavior.HOscillator;
+import hype.extended.colorist.HColorPool;
+// import hype.extended.layout.HGridLayout;
+
 import peasy.*;
 PeasyCam cam;
 HDrawable3D d;
@@ -31,7 +35,7 @@ void setup() {
 		x = random(-width/2, width/2);
 		y = random(-height/2, height/2);
 		z = random(-100, 100);
-		
+
 		color fgC = color(255, 119, 0, 20);
 
 		d
@@ -41,7 +45,18 @@ void setup() {
 			.fill(fgC)
 			.stroke(#FF7700);
 
+
+
+	new HOscillator()
+		.target(d)
+		.property(H.Z)
+		.relativeVal(0)
+		.range(-100, 100)
+		.speed(random(0, .5))
+		.freq(5);
+
 		H.add(d);
+
 	}
 
 cam = new PeasyCam(this, 600);
