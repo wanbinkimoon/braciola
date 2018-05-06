@@ -33,6 +33,7 @@ void setup() {
 			.rotate(r)
 			.noFill()
 			.stroke(#FF7700);
+
 		H.add(d);
 	}
 

@@ -21,18 +21,21 @@ void settings(){
 void setup() {
 	H.init(this).background(bgC);
 	smooth();
+
 	for (int i = 0; i < 100; ++i) {
-		d = new HEllipse();
+		d = new HRect();
 		x = random(width);
 		y = random(height);
-		float r = random(360);
 		d
 			.size((int)random(25,125))
 			.loc(x,y)
 			.anchorAt(H.CENTER)
-			.rotate(r)
 			.noFill()
 			.stroke(#FF7700);
+
+		HRotate r = new HRotate();
+		r.target(d).speedRad( TWO_PI/90 );
+
 		H.add(d);
 	}
 
