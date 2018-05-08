@@ -10,3 +10,6 @@ This seres of sketces focuses on boxes and animation relatives to plans and shap
 
 ## Cube
 ![](_gifs/cube.gif)
+
+## Platoon
+![](_gifs/platoon.gif)

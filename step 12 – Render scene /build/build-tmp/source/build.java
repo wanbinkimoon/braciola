@@ -28,22 +28,9 @@ String dataPATH = "../../data";
 
 // ================================================================
 
-
-boolean   letsRender       = false;
-boolean   letsRenderHD     = true;
-
-int       renderNum        = 0;
-int       renderMax        = 5;
-int       renderModulo     = 20;
-
-PGraphics renderCanvas;
-
-PGraphics renderCanvasHD;
-int       renderCanvasHD_w;
-int       renderCanvasHD_h;
-int       renderCanvasHD_s = 6; // s=scale / scale factor based on stageW + stageH - so a 1920 x 1080 stage is a 11520 x 6480 image, 72DPI yes, but 160x90 inches or 13x7.5 feet, lol
-
-String    renderPATH       = "../render/";
+boolean letsRender = false;
+int     renderNum  = 0;
+String  renderPATH = "../render/";
 
 // ================================================================
 
@@ -70,8 +57,6 @@ int bounce;
 // ================================================================
 
 public void settings(){ 
-	renderCanvasHD_w = stageW*renderCanvasHD_s;
-	renderCanvasHD_h = stageH*renderCanvasHD_s;
 
 	size(stageW,stageH,P3D);
 }
@@ -79,12 +64,8 @@ public void settings(){
 // ================================================================
 
 public void setup() {
-	renderCanvasHD = createGraphics(renderCanvasHD_w,renderCanvasHD_h,P3D);
-	renderCanvas   = createGraphics(stageW,stageH,P3D);
-
-	colors = new HColorPool(0xffFFFFFF, 0xff6699cc, 0xfffff275, 0xffff8c42, 0xffff3c38, 0xffa23e48);
-
-
+	colors = new HColorPool(0xffE9F042, 0xff08EF98, 0xff3DCEF2, 0xffFDB4F9, 0xffF1F1F1, 0xffED329F);
+	
 	H.init(this).background(bgC).use3D(true);
 	
 
@@ -119,7 +100,9 @@ public void setup() {
 				r = new HRotate();
 				r
 					.target(d)
-					.speedZ(1);
+					.speedZ( 1 )
+					.speedX( 2 )
+					.speedY( 1.5f );
 
 				H.add(d);
 				
@@ -132,35 +115,23 @@ cam = new PeasyCam(this, 600);
 
 // ================================================================
 public void draw() {
-		PGraphics _whichCanvas;
-	int       _w; // width
-	int       _h; // height
-	float     _s; // scale
+	lights();
+	H.drawStage();
 
-	if (letsRenderHD) {
-		_whichCanvas = renderCanvasHD;
-		_w           = renderCanvasHD_w;
-		_h           = renderCanvasHD_h;
-		_s           = renderCanvasHD_s;
-	} else {
-		_whichCanvas = renderCanvas;
-		_w           = stageW;
-		_h           = stageH;
-		_s           = 1.0f;
+	if (letsRender) {
+		letsRender = false;
+		save(renderPATH + renderNum + ".png");
+		renderNum++;
 	}
+}
 
-	_whichCanvas.beginDraw();
-	_whichCanvas.clear();
 
-		_whichCanvas.pushMatrix();
-			_whichCanvas.translate(0, 0, 0);
-			_whichCanvas.scale(_s);
-			_whichCanvas.lights();	
-			_whichCanvas.H.drawStage();
-
-			_whichCanvas.popMatrix();
-
-	_whichCanvas.endDraw();
+public void keyPressed() {
+	switch (key) {
+		case 'p':
+			letsRender = true;
+		break;
+	}
 }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "build" };
