@@ -23,7 +23,7 @@ public class build extends PApplet {
 
 int stageW      = 600;
 int stageH      = 600;
-int bgC       = 0xff222222;
+int bgC       = 0xfff9f9f9;
 String dataPATH = "../../data";
 
 // ================================================================
@@ -53,28 +53,34 @@ public void settings(){
 // ================================================================
 
 public void setup() {
+	colors = new HColorPool(0xffFFFFFF, 0xff12537b, 0xff186e7e, 0xff229a83, 0xff2ab987, 0xffedf1ad);
+
 	H.init(this).background(bgC).use3D(true);
 	
-	colors = new HColorPool(0xffFFFFFF, 0xffF7F7F7, 0xffECECEC, 0xff333333, 0xff0095A8, 0xff00616F, 0xffFF3300, 0xffFF6600);
 
-	int rects = 25;
+	int rects = 100;
+
 	for (int i = 0; i < rects; ++i) {
 		d = new HBox();
-		x = random(-width/2, width/2);
-		y = random(-height/2, height/2);
+		x = random(-width/4, width/4);
+		y = random(-height/4, height/4);
 		z = random(-100, 100);
-		alpha = 100;
+		alpha = 255;
 		int fgC = color(colors.getColor(), alpha);
 
 		d
-			.size((int)random(25,125))
+			.size((int)random(25,50))
 			.loc(x,y,z)
-			.anchorAt(H.RIGHT)
+			.anchorAt(H.CENTER)
 			.fill(fgC)
 			.noStroke();
 
 		r = new HRotate();
-		r.target(d).speed( random(-2, 2) );
+		r
+			.target(d)
+			.speedX( random(-2, 2) )
+			.speedY( random(-2, 2) )
+			.speedZ( random(-2, 2) );
 
 
 	new HOscillator()

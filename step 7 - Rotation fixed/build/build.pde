@@ -34,7 +34,8 @@ void setup() {
 	smooth();
 	colors = new HColorPool(#FFFFFF, #F7F7F7, #ECECEC, #333333, #0095A8, #00616F, #FF3300, #FF6600);
 
-	int rects = 25;
+	int rects = 100;
+
 	for (int i = 0; i < rects; ++i) {
 		d = new HBox();
 		x = random(-width/2, width/2);
@@ -44,14 +45,16 @@ void setup() {
 		color fgC = color(colors.getColor(), alpha);
 
 		d
-			.size((int)random(25,125))
+			.size((int)random(25,50))
 			.loc(x,y,z)
-			.anchorAt(H.RIGHT)
+			.anchorAt(H.CENTER)
 			.fill(fgC)
 			.noStroke();
 
 		r = new HRotate();
-		r.target(d).speed( random(-2, 2) );
+		r
+			.target(d)
+			.speedX( random(-2, 2) );
 
 
 	new HOscillator()
