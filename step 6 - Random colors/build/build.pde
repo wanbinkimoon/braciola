@@ -13,11 +13,12 @@ import hype.extended.colorist.HColorPool;
 import peasy.*;
 PeasyCam cam;
 HDrawable3D d;
-HDrawablePool pool;
+HColorPool colors;
 
 float x;
 float y;
 float z;
+int alpha;
 // ================================================================
 
 void settings(){ 
@@ -29,12 +30,25 @@ void settings(){
 void setup() {
 	H.init(this).background(bgC).use3D(true);
 	smooth();
+	colors = new HColorPool(#FFFFFF, #F7F7F7, #ECECEC, #333333, #0095A8, #00616F, #FF3300, #FF6600);
 
 	int rects = 25;
-	pool = new HDrawablePool(rects);
-
+	for (int i = 0; i < rects; ++i) {
 		d = new HBox();
-		color fgC = color(255, 119, 0, 20);
+		x = random(-width/2, width/2);
+		y = random(-height/2, height/2);
+		z = random(-100, 100);
+		alpha = 50;
+		color fgC = color(colors.getColor(), alpha);
+
+		d
+			.size((int)random(25,125))
+			.loc(x,y,z)
+			.anchorAt(H.CENTER)
+			.fill(fgC)
+			.noStroke();
+
+
 
 	new HOscillator()
 		.target(d)
@@ -43,18 +57,10 @@ void setup() {
 		.range(-100, 100)
 		.speed(random(0, .5))
 		.freq(5);
-	
-	pool.autoAddToStage()
-		.add(	new HBox()
-			.size((int)random(25,125))
-			.loc(random(-width/2, width/2),
-					random(-height/2, height/2),
-					random(-100, 100))
-			.anchorAt(H.CENTER)
-			.fill(fgC)
-			.stroke(#FF7700))
-		.colorist(new HColorPool(#FFFFFF, #F7F7F7, #ECECEC, #333333, #0095A8, #00616F, #FF3300, #FF6600).fillOnly())
-		.requestAll();
+
+		H.add(d);
+
+	}
 
 cam = new PeasyCam(this, 600);
 }

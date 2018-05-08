@@ -56,6 +56,7 @@ public void setup() {
 		x = random(-width/2, width/2);
 		y = random(-height/2, height/2);
 		z = random(-100, 100);
+
 		int fgC = color(255, 119, 0, 20);
 
 		d
@@ -75,7 +76,7 @@ public void setup() {
 		.speed(random(0, .5f))
 		.freq(5);
 
-		H.add(d).colorist(new HColorPool(0xffFFFFFF, 0xffF7F7F7, 0xffECECEC, 0xff333333, 0xff0095A8, 0xff00616F, 0xffFF3300, 0xffFF6600).fillOnly());
+		H.add(d);
 
 	}
 

@@ -34,11 +34,12 @@ String dataPATH = "../../data";
 
 PeasyCam cam;
 HDrawable3D d;
-HDrawablePool pool;
+HColorPool colors;
 
 float x;
 float y;
 float z;
+int alpha;
 // ================================================================
 
 public void settings(){ 
@@ -50,12 +51,25 @@ public void settings(){
 public void setup() {
 	H.init(this).background(bgC).use3D(true);
 	
+	colors = new HColorPool(0xffFFFFFF, 0xffF7F7F7, 0xffECECEC, 0xff333333, 0xff0095A8, 0xff00616F, 0xffFF3300, 0xffFF6600);
 
 	int rects = 25;
-	pool = new HDrawablePool(rects);
-
+	for (int i = 0; i < rects; ++i) {
 		d = new HBox();
-		int fgC = color(255, 119, 0, 20);
+		x = random(-width/2, width/2);
+		y = random(-height/2, height/2);
+		z = random(-100, 100);
+		alpha = 50;
+		int fgC = color(colors.getColor(), alpha);
+
+		d
+			.size((int)random(25,125))
+			.loc(x,y,z)
+			.anchorAt(H.CENTER)
+			.fill(fgC)
+			.noStroke();
+
+
 
 	new HOscillator()
 		.target(d)
@@ -64,18 +78,10 @@ public void setup() {
 		.range(-100, 100)
 		.speed(random(0, .5f))
 		.freq(5);
-	
-	pool.autoAddToStage()
-		.add(	new HBox()
-			.size((int)random(25,125))
-			.loc(random(-width/2, width/2),
-					random(-height/2, height/2),
-					random(-100, 100))
-			.anchorAt(H.CENTER)
-			.fill(fgC)
-			.stroke(0xffFF7700))
-		.colorist(new HColorPool(0xffFFFFFF, 0xffF7F7F7, 0xffECECEC, 0xff333333, 0xff0095A8, 0xff00616F, 0xffFF3300, 0xffFF6600).fillOnly())
-		.requestAll();
+
+		H.add(d);
+
+	}
 
 cam = new PeasyCam(this, 600);
 }
