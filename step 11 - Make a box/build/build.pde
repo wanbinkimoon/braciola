@@ -51,9 +51,9 @@ void setup() {
 				area = 200;
 				bounce = 20;
 
-				x = map(i * _r, 0, rects * _r, -area, area) ;
+				x = map(i * _r, 0, rects * _r, -area, area);
 				y = map(j * _r, 0, rects * _r, -area, area);
-				z = map(j * _r, 0, rects * _r, -area, area);
+				z = map(k * _r, 0, rects * _r, -area, area);
 				
 				alpha = 255;
 				color fgC = color(colors.getColor(), alpha);
@@ -63,21 +63,14 @@ void setup() {
 					.loc(x,y,z)
 					.anchorAt(H.CENTER)
 					.fill(fgC)
-					.noStroke();
+					.noStroke()
+					.rotateX(45)
+					.rotateZ(45);
 
 				r = new HRotate();
 				r
 					.target(d)
-					.speedY( random(-2, 2) );
-
-
-			new HOscillator()
-				.target(d)
-				.property(H.Z)
-				.relativeVal(z)
-				.range(-bounce, bounce)
-				.speed(random(.5, 1))
-				.freq(5);
+					.speedZ(1);
 
 				H.add(d);
 				
